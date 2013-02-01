@@ -3,18 +3,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- Using Google CDN -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
-    <script src="jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script>
-        // Wrap this function in a closure so we don't pollute the namespace
         (function worker() {
           $.ajax({
-            url : 'http://127.0.0.1:8000/leader.html',
+            url : 'http://jlengrand.pythonanywhere.com/static/leader.html',
             success: function(data) {
               $('.text').html(data);
             },
             complete: function() {
-              // Schedule the next request when the current one's complete
               setTimeout(worker, 1000);
             }
           });
@@ -23,7 +20,7 @@
 </head>
 <body>
     <div class="text">
-        Lorem Ipsum <br />
+        To be loaded <br />
     </div>
 </body>
 </html>
