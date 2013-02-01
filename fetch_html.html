@@ -6,16 +6,19 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
     <script src="jquery.js"></script>
     <script>
-        $(document).ready(function() {
-                $.ajax({
-                    /* url : 'http://jlengrand.pythonanywhere.com/static/leader.html', */
-                    url : 'http://127.0.0.1:8000/leader.html',
-                    dataType: "text",
-                    success : function (data) {
-                        $(".text").html(data);
-                    }
-                });
-        });
+        // Wrap this function in a closure so we don't pollute the namespace
+        (function worker() {
+          $.ajax({
+            url : 'http://127.0.0.1:8000/leader.html',
+            success: function(data) {
+              $('.text').html(data);
+            },
+            complete: function() {
+              // Schedule the next request when the current one's complete
+              setTimeout(worker, 1000);
+            }
+          });
+        })();
     </script>
 </head>
 <body>
